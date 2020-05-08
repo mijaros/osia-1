@@ -23,7 +23,7 @@ jobs:
     - name: webfactory/ssh-agent
       uses: webfactory/ssh-agent@v0.2.0
       with:
-        key: ${{ secrets.GH_KEY }}
+        ssh-private-key: ${{ secrets.GH_TOKEN }}
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
