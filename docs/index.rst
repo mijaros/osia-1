@@ -14,6 +14,8 @@ Welcome to osia's documentation!
    usage/index
    apiref
 
+Test
+====
 
 Indices and tables
 ==================
