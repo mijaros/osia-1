@@ -71,7 +71,7 @@ for a in [v for a in ARGUMENTS for u, v in ARGUMENTS[a].items()]:
         a['proc'] = _identity
 
 
-def resolve_installer(from_args):
+def _resolve_installer(from_args):
     if from_args.installer is None and from_args.installer_version is None:
         raise Exception('Either installer or installer-version must be passed')
     if from_args.installer:
