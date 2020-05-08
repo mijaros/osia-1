@@ -29,9 +29,9 @@ jobs:
         pip install pipenv
         pipenv update --dev
     - name: Sphinx Build
-      uses: ammaraskar/sphinx-action@0.4
-      with:
-        build-command: pipenv run make html
+      run: |
+        cd docs/
+        pipenv run make html
         
     - name: Publish documentation
       run: |
