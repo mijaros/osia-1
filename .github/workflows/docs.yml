@@ -20,6 +20,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
+    - name: webfactory/ssh-agent
+      uses: webfactory/ssh-agent@v0.2.0
+      with:
+        key: ${{ secrets.GH_KEY }}
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -35,7 +40,7 @@ jobs:
         
     - name: Publish documentation
       run: |
-        git clone https://github.com/mijaros/osia-1 --branch gh-pages --single-branch gh-pages
+        git clone git@github.com:mijaros/osia-1 --branch gh-pages --single-branch gh-pages
         cp -r docs/_build/html/* gh-pages/
         cd gh-pages
         git config --local user.email "action@github.com"
@@ -43,10 +48,7 @@ jobs:
         git add .
         git commit -m "Update documentation" -a || true
     - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        branch: gh-pages
-        directory: gh-pages
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd gh-pages && git push origin gh-pages
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
